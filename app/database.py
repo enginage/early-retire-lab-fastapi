@@ -2,18 +2,21 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from pydantic_settings import BaseSettings
-import os
 
 class Settings(BaseSettings):
-    database_url: str = os.getenv("DATABASE_URL", "")
+    database_url: str = ""
     
     class Config:
         env_file = ".env"
+        env_file_encoding = "utf-8"
 
 settings = Settings()
 
 if not settings.database_url:
-    raise ValueError("DATABASE_URL environment variable is not set")
+    raise ValueError(
+        "DATABASE_URL environment variable is not set. "
+        "Please create a .env file with DATABASE_URL=postgresql://..."
+    )
 
 engine = create_engine(settings.database_url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

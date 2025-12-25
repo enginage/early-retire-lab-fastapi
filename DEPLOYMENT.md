@@ -14,6 +14,10 @@ Vercel 대시보드 > Settings > Environment Variables에서 다음 변수 추�
 - `DATABASE_URL`: PostgreSQL 연결 문자열
   - 예: `postgresql://user:password@host:port/database?sslmode=require`
 
+- `ALLOWED_ORIGINS` (선택사항): CORS 허용 origin 목록 (쉼표로 구분)
+  - 예: `https://early-retire-lab.vercel.app,https://www.yourdomain.com`
+  - 설정하지 않으면 모든 origin 허용 (`*`)
+
 ### 3. 빌드 설정
 
 Vercel는 자동으로 `vercel.json`을 읽어 설정을 적용합니다.
