@@ -25,9 +25,15 @@ pip install -r requirements.txt
 
 `.env` 파일을 생성하고 다음 내용을 추가:
 
+```env
+DATABASE_URL=postgresql://user:password@host:port/database?sslmode=require
 ```
-DATABASE_URL=postgresql://postgres.cyuolmjjxpbakrpnytae:gA95PzY49k3qloq3@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
-```
+
+**주의**: 실제 데이터베이스 URL은 보안상 `.env` 파일에만 저장하고 Git에 커밋하지 마세요.
+
+Vercel 배포 시 환경 변수는 Vercel 대시보드에서 설정해야 합니다.
+
+자세한 배포 가이드는 [DEPLOYMENT.md](./DEPLOYMENT.md)를 참조하세요.
 
 ## 실행 방법
 
@@ -59,4 +65,3 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
-
