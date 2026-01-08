@@ -15,8 +15,7 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 10,
-      "memory": 1024,
-      "excludeFiles": "{venv,env,.venv,__pycache__,**/__pycache__/**,.git,.pytest_cache,*.pyc,*.pyo,*.pyd,.Python,*.so,*.egg,*.egg-info,app/scrapers/**,app/import/**,tests/**,*.md,requirements-scrapers.txt,README.md,DEPLOYMENT.md,api/__pycache__/**,app/__pycache__/**}"
+      "memory": 1024
     }
   }
 }
