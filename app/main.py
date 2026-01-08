@@ -15,10 +15,19 @@ app = FastAPI(
 
 # CORS 설정
 # 환경 변수에서 허용할 origin 목록 가져오기
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
-if allowed_origins == ["*"]:
-    # 프로덕션에서는 기본적으로 모든 origin 허용 (필요시 환경 변수로 제한)
-    allowed_origins = ["*"]
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+if allowed_origins_env:
+    # 환경 변수에 값이 있으면 쉼표로 분리해서 사용
+    allowed_origins = [origin.strip() for origin in allowed_origins_env.split(",")]
+else:
+    # 환경 변수가 없으면 기본값으로 로컬 및 Vercel 도메인 허용
+    allowed_origins = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://early-retire-lab.vercel.app",
+        "https://enginage.github.io",
+    ]
 
 app.add_middleware(
     CORSMiddleware,
