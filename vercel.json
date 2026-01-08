@@ -11,6 +11,11 @@
       "src": "/(.*)",
       "dest": "api/index.py"
     }
-  ]
+  ],
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "**/{venv,env,.venv,__pycache__,.git,.pytest_cache,*.pyc,*.pyo,*.pyd,.Python,*.so,*.egg,*.egg-info,app/scrapers,app/import,tests,*.md,requirements-scrapers.txt}/**"
+    }
+  }
 }
 

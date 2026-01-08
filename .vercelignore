@@ -1,0 +1,30 @@
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Scrapers (not needed in serverless function)
+app/scrapers/
+
+# Import scripts (not needed in serverless function)
+app/import/
+
+# Development files
+.pytest_cache/
+*.md
+.git/
+.env
+
+# Scraper requirements
+requirements-scrapers.txt
