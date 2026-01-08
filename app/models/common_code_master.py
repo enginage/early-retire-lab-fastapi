@@ -4,6 +4,7 @@ from app.database import Base
 
 class CommonCodeMaster(Base):
     __tablename__ = "common_code_master"
+    __table_args__ = {'schema': 'basic'}
     
     id = Column(Integer, primary_key=True, index=True)
     code = Column(String(50), nullable=False, unique=True, index=True)  # 코드

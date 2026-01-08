@@ -1,16 +1,16 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import join
 from app.models.isa_account_dividend import ISAAccountDividend
-from app.models.domestic_etf import DomesticETF
+from app.models.domestic_etfs import DomesticETFs
 from app.schemas.isa_account_dividend import ISAAccountDividendCreate, ISAAccountDividendUpdate
 
 def get_isa_account_dividends(db: Session, account_id: int, year_month: str = None, skip: int = 0, limit: int = 100):
     query = db.query(
         ISAAccountDividend,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        ISAAccountDividend.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        ISAAccountDividend.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         ISAAccountDividend.account_id == account_id
@@ -32,10 +32,10 @@ def get_isa_account_dividends(db: Session, account_id: int, year_month: str = No
 def get_isa_account_dividend(db: Session, dividend_id: int):
     result = db.query(
         ISAAccountDividend,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        ISAAccountDividend.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        ISAAccountDividend.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         ISAAccountDividend.id == dividend_id

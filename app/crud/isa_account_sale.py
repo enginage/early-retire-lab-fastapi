@@ -1,17 +1,17 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import join
 from app.models.isa_account_sale import ISAAccountSale
-from app.models.domestic_etf import DomesticETF
+from app.models.domestic_etfs import DomesticETFs
 from app.schemas.isa_account_sale import ISAAccountSaleCreate, ISAAccountSaleUpdate
 from decimal import Decimal
 
 def get_isa_account_sales(db: Session, account_id: int, year_month: str = None, skip: int = 0, limit: int = 100):
     query = db.query(
         ISAAccountSale,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        ISAAccountSale.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        ISAAccountSale.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         ISAAccountSale.account_id == account_id
@@ -33,10 +33,10 @@ def get_isa_account_sales(db: Session, account_id: int, year_month: str = None, 
 def get_isa_account_sale(db: Session, sale_id: int):
     result = db.query(
         ISAAccountSale,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        ISAAccountSale.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        ISAAccountSale.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         ISAAccountSale.id == sale_id

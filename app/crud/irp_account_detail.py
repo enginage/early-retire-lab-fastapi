@@ -1,16 +1,16 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import join
 from app.models.irp_account_detail import IRPAccountDetail
-from app.models.domestic_etf import DomesticETF
+from app.models.domestic_etfs import DomesticETFs
 from app.schemas.irp_account_detail import IRPAccountDetailCreate, IRPAccountDetailUpdate
 
 def get_irp_account_details(db: Session, account_id: int, skip: int = 0, limit: int = 100):
     results = db.query(
         IRPAccountDetail,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        IRPAccountDetail.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        IRPAccountDetail.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         IRPAccountDetail.account_id == account_id
@@ -27,10 +27,10 @@ def get_irp_account_details(db: Session, account_id: int, skip: int = 0, limit: 
 def get_irp_account_detail(db: Session, detail_id: int):
     result = db.query(
         IRPAccountDetail,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        IRPAccountDetail.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        IRPAccountDetail.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         IRPAccountDetail.id == detail_id

@@ -1,16 +1,16 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import join
 from app.models.pension_fund_account_detail import PensionFundAccountDetail
-from app.models.domestic_etf import DomesticETF
+from app.models.domestic_etfs import DomesticETFs
 from app.schemas.pension_fund_account_detail import PensionFundAccountDetailCreate, PensionFundAccountDetailUpdate
 
 def get_pension_fund_account_details(db: Session, account_id: int, skip: int = 0, limit: int = 100):
     results = db.query(
         PensionFundAccountDetail,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        PensionFundAccountDetail.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        PensionFundAccountDetail.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         PensionFundAccountDetail.account_id == account_id
@@ -27,10 +27,10 @@ def get_pension_fund_account_details(db: Session, account_id: int, skip: int = 0
 def get_pension_fund_account_detail(db: Session, detail_id: int):
     result = db.query(
         PensionFundAccountDetail,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        PensionFundAccountDetail.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        PensionFundAccountDetail.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         PensionFundAccountDetail.id == detail_id

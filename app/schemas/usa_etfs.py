@@ -1,18 +1,20 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class USAETFBase(BaseModel):
+class USAETFsBase(BaseModel):
     ticker: str
     name: str
+    etf_type: Optional[str] = None
 
-class USAETFCreate(USAETFBase):
+class USAETFsCreate(USAETFsBase):
     pass
 
-class USAETFUpdate(BaseModel):
+class USAETFsUpdate(BaseModel):
     ticker: Optional[str] = None
     name: Optional[str] = None
+    etf_type: Optional[str] = None
 
-class USAETF(USAETFBase):
+class USAETFs(USAETFsBase):
     id: int
     
     class Config:

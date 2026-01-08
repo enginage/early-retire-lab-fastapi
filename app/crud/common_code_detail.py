@@ -6,7 +6,8 @@ def get_common_code_details(db: Session, master_id: int = None, skip: int = 0, l
     query = db.query(CommonCodeDetail)
     if master_id:
         query = query.filter(CommonCodeDetail.master_id == master_id)
-    return query.offset(skip).limit(limit).all()
+    # order_by를 offset/limit 전에 적용하고, order_no가 없을 경우를 대비해 id로도 정렬
+    return query.order_by(CommonCodeDetail.order_no.asc(), CommonCodeDetail.id.asc()).offset(skip).limit(limit).all()
 
 def get_common_code_detail(db: Session, detail_id: int):
     return db.query(CommonCodeDetail).filter(CommonCodeDetail.id == detail_id).first()
@@ -26,6 +27,7 @@ def update_common_code_detail(db: Session, detail_id: int, detail: CommonCodeDet
     db_detail.master_id = detail.master_id
     db_detail.detail_code = detail.detail_code
     db_detail.detail_code_name = detail.detail_code_name
+    db_detail.order_no = detail.order_no
     
     db.commit()
     db.refresh(db_detail)

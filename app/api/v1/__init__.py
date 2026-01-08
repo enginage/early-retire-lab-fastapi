@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1 import financial_institutions, expenses, income_targets, early_retirement_initial_setting, isa_accounts, isa_account_details, isa_account_sales, isa_account_dividends, pension_fund_accounts, pension_fund_account_details, irp_accounts, irp_account_details, common_code_masters, common_code_details, domestic_etfs, usa_etfs, experience_lab_stocks
+from app.api.v1 import financial_institutions, expenses, income_targets, early_retirement_initial_setting, isa_accounts, isa_account_details, isa_account_sales, isa_account_dividends, pension_fund_accounts, pension_fund_account_details, irp_accounts, irp_account_details, common_code_masters, common_code_details, domestic_etfs, usa_etfs, usa_indicators, domestic_etfs_daily_chart, domestic_etfs_dividend, usa_etfs_daily_chart, usa_etfs_dividend, usd_krw_exchange
 
 api_router = APIRouter()
 api_router.include_router(financial_institutions.router, prefix="/financial-institutions", tags=["financial-institutions"])
@@ -17,6 +17,11 @@ api_router.include_router(irp_account_details.router, prefix="/irp-account-detai
 api_router.include_router(common_code_masters.router, prefix="/common-code-masters", tags=["common-code-masters"])
 api_router.include_router(common_code_details.router, prefix="/common-code-details", tags=["common-code-details"])
 api_router.include_router(domestic_etfs.router, prefix="/domestic-etfs", tags=["domestic-etfs"])
+api_router.include_router(domestic_etfs_daily_chart.router, prefix="/domestic-etfs-daily-chart", tags=["domestic-etfs-daily-chart"])
+api_router.include_router(domestic_etfs_dividend.router, prefix="/domestic-etfs-dividend", tags=["domestic-etfs-dividend"])
 api_router.include_router(usa_etfs.router, prefix="/usa-etfs", tags=["usa-etfs"])
-api_router.include_router(experience_lab_stocks.router, prefix="/experience-lab-stocks", tags=["experience-lab-stocks"])
+api_router.include_router(usa_etfs_daily_chart.router, prefix="/usa-etfs-daily-chart", tags=["usa-etfs-daily-chart"])
+api_router.include_router(usa_etfs_dividend.router, prefix="/usa-etfs-dividend", tags=["usa-etfs-dividend"])
+api_router.include_router(usd_krw_exchange.router, prefix="/usd-krw-exchange", tags=["usd-krw-exchange"])
+api_router.include_router(usa_indicators.router, prefix="/usa-indicators", tags=["usa-indicators"])
 

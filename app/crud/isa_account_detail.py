@@ -1,16 +1,16 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import join
 from app.models.isa_account_detail import ISAAccountDetail
-from app.models.domestic_etf import DomesticETF
+from app.models.domestic_etfs import DomesticETFs
 from app.schemas.isa_account_detail import ISAAccountDetailCreate, ISAAccountDetailUpdate
 
 def get_isa_account_details(db: Session, account_id: int, skip: int = 0, limit: int = 100):
     results = db.query(
         ISAAccountDetail,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        ISAAccountDetail.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        ISAAccountDetail.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         ISAAccountDetail.account_id == account_id
@@ -27,10 +27,10 @@ def get_isa_account_details(db: Session, account_id: int, skip: int = 0, limit: 
 def get_isa_account_detail(db: Session, detail_id: int):
     result = db.query(
         ISAAccountDetail,
-        DomesticETF.name.label('etf_name')
+        DomesticETFs.name.label('etf_name')
     ).join(
-        DomesticETF,
-        ISAAccountDetail.stock_code == DomesticETF.ticker,
+        DomesticETFs,
+        ISAAccountDetail.stock_code == DomesticETFs.ticker,
         isouter=False  # INNER JOIN
     ).filter(
         ISAAccountDetail.id == detail_id
