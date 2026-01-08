@@ -1,22 +1,9 @@
-# Core API dependencies
+# Core API dependencies only (production)
 fastapi>=0.104.0
-uvicorn[standard]>=0.24.0
+uvicorn>=0.24.0
 sqlalchemy>=2.0.0
 psycopg2-binary>=2.9.0
 pydantic>=2.5.0
 pydantic-settings>=2.1.0
 python-dotenv>=1.0.0
 python-multipart>=0.0.6
-
-# Data processing (lightweight)
-requests>=2.31.0
-beautifulsoup4>=4.12.0
-yfinance>=0.2.0
-
-# Optional dependencies for specific features (only install if needed)
-# pandas>=2.1.0  # Only needed for data import scripts
-# openpyxl>=3.1.0  # Only needed for Excel import
-# finance-datareader>=0.9.50  # Only needed for Korean market data
-# pykrx>=1.0.45  # Only needed for Korean market data
-# selenium>=4.15.0  # Only needed for scrapers (use requirements-scrapers.txt instead)
-# webdriver-manager>=4.0.0  # Only needed for scrapers (use requirements-scrapers.txt instead)
